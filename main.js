@@ -1,62 +1,54 @@
-import { plane } from "./plane.js";
-import  {Vector3} from "./vector3.js";
+// Importer de ting der skal importeres
+import { Vector3 } from "./vector3.js";
 import { Cube } from "./cube.js";
 
+// Opsæt canvasen
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-const Camera = {
-    position: new Vector3(0,0,-100)
+// Kameraet
+export let Camera = {
+    position: new Vector3(0,0,-100),
+    speed: 5
 }
+canvas.position = new Vector3(0,0,0);
 
-const _canvas = {
-    plane: new plane(new Vector3(0,0,-1), new Vector3(0,0,0))
+// Cubes i scenen
+let cube = new Cube(new Vector3(200, 200, 400), 200);
+let cube2 = new Cube(new Vector3(800, 200, 400), 200);
+
+// Funktion der kører hvert frame
+function update() {
+    // Tegn baggrunden
+    ctx.fillStyle = "Black";
+    ctx.fillRect(0,0,canvas.width, canvas.height);
+
+    // Tegn
+    cube.draw(ctx);
+    cube2.draw(ctx);
+
+    // Genstart funktionen næste frame
+    requestAnimationFrame(update);
 }
+update();
 
-export class Vertex {
-    constructor(position) { // tager Vector 3
-        this.position = position;
+
+
+// Controller
+document.addEventListener("keydown", (e) => {
+    if (e.key == "d") {
+        Camera.position.x += Camera.speed;
     }
 
-    project() {
-        return _canvas.plane.GetIntersectPoint(Camera.position, this.position.sub(Camera.position));
+    if (e.key == "a") {
+        Camera.position.x -= Camera.speed;
     }
-}
 
-canvas.position = new Vertex(0,0,0);
-
-export class Line {
-    constructor(v1, v2) {
-        this.v1 = v1;
-        this.v2 = v2;
+    if (e.key == "w") {
+        Camera.position.y -= Camera.speed;
     }
-    
-    draw() {
-        console.log(v1.project())
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "white";
-        ctx.beginPath()
-        ctx.moveTo(v1.project().x, v1.project().y);
-        ctx.lineTo(v2.project().x, v2.project().y);
-        ctx.stroke();
+
+    if (e.key == "s") {
+        Camera.position.y += Camera.speed;
     }
-}
-
-
-
-ctx.fillStyle = "Black";
-ctx.fillRect(0,0,canvas.width, canvas.height);
-
-let v1 = new Vertex(new Vector3(50, 40, 60));
-let v2 = new Vertex(new Vector3(300, 200, 60));
-
-function draw() {
-    let cube = new Cube(new Vector3(canvas.width / 2, canvas.height / 2, 500), 50);
-    
-    cube.Lines[0].draw();
-    cube.Lines[1].draw();
-
-    console.log(cube.Lines[0], cube.Lines[1]);
-}
-
-draw();
+});
