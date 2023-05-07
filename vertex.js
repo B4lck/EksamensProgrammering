@@ -1,6 +1,7 @@
 import { Camera } from "./main.js";
 
 export class Vertex {
+    // #CertifiedBalckAlfaMoment
     constructor(position) { // tager Vector 3 som argument
         this.position = position;
     }

@@ -68,3 +68,4 @@ document.addEventListener("keydown", (e) => {
         canvas.position.z -= Camera.speed;
     }
 });
+

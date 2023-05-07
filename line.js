@@ -2,9 +2,9 @@ import { Vertex } from "./vertex.js";
 
 export class Line {
     // En linje består af 2 punkter, som hver bliver kaldet v1 og v2.
-    constructor(_v1, _v2) {
-        this.v1 = _v1;
-        this.v2 = _v2;
+    constructor(v1, v2) {
+        this.v1 = v1;
+        this.v2 = v2;
     }
     
     // Funktionen for at tegne en linje
