@@ -1,7 +1,7 @@
 # EksamensProgrammering
  Eksamens projekt i programmering - 3D
 
- ##Om programmet
+##Om programmet
  Jeg har som eksamensprojekt i programmering lavet en simpel 3D engine, som kan rendere simple former i wire frame. Til eksamen fik jeg 12
 
 ## Guide til hvordan programmet skal køres
